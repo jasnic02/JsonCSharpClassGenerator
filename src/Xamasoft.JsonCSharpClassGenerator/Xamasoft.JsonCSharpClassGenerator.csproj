@@ -3,7 +3,7 @@
     <ProjectGuid>{7BEF7EAA-DE37-40FB-BD33-3DEF0685031F}</ProjectGuid>
     <RootNamespace>Xamasoft.JsonClassGenerator</RootNamespace>
     <AssemblyName>Xamasoft.JsonClassGenerator</AssemblyName>
-    <TargetFramework>net5.0</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <AssemblyTitle>Json Class Generator</AssemblyTitle>
     <Company>Xamasoft</Company>
     <Product>Json Class Generator</Product>
@@ -18,7 +18,7 @@
     <DebugType>pdbonly</DebugType>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="PluralizeService.Core" Version="1.2.21147.2" />
   </ItemGroup>
 </Project>
