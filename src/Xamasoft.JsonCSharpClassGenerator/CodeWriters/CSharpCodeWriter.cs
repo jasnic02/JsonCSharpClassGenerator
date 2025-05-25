@@ -30,7 +30,8 @@ namespace Xamasoft.JsonClassGenerator.CodeWriters
             switch (type.Type)
             {
                 case JsonTypeEnum.Anything: return "object";
-                case JsonTypeEnum.Array: return arraysAsLists ? "IList<" + GetTypeName(type.InternalType, config) + ">" : GetTypeName(type.InternalType, config) + "[]";
+                //case JsonTypeEnum.Array: return arraysAsLists ? "IList<" + GetTypeName(type.InternalType, config) + ">" : GetTypeName(type.InternalType, config) + "[]";
+                case JsonTypeEnum.Array: return arraysAsLists ? "List<" + GetTypeName(type.InternalType, config) + ">" : GetTypeName(type.InternalType, config) + "[]";
                 case JsonTypeEnum.Dictionary: return "Dictionary<string, " + GetTypeName(type.InternalType, config) + ">";
                 case JsonTypeEnum.Boolean: return "bool";
                 case JsonTypeEnum.Float: return "double";
@@ -105,7 +106,7 @@ namespace Xamasoft.JsonClassGenerator.CodeWriters
             sw.WriteLine();
             sw.WriteLine("namespace {0}", root && !config.UseNestedClasses ? config.Namespace : (config.SecondaryNamespace ?? config.Namespace));
             sw.WriteLine("{");
-            sw.WriteLine();
+            //sw.WriteLine();
         }
 
         public void WriteNamespaceEnd(IJsonClassGeneratorConfig config, TextWriter sw, bool root)
@@ -186,7 +187,7 @@ namespace Xamasoft.JsonClassGenerator.CodeWriters
             if (config.SortMemberFields) theFields = theFields.OrderBy(f => f.JsonMemberName).ToList();
             foreach (var field in theFields)
             {
-                if (config.UsePascalCase || config.ExamplesInDocumentation) sw.WriteLine();
+                if ((config.UsePascalCase || config.ExamplesInDocumentation) && theFields.First() != field) sw.WriteLine();
 
                 if (config.ExamplesInDocumentation)
                 {
