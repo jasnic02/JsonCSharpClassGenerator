@@ -65,11 +65,15 @@ namespace Xamasoft.JsonClassGenerator.CodeWriters
         {
             if (config.UseNamespaces)
             {
-                foreach (var line in JsonClassGenerator.FileHeader)
+                if (!config.SkipHeader)
                 {
-                    sw.WriteLine("// " + line);
+                    foreach (var line in JsonClassGenerator.FileHeader)
+                    {
+                        sw.WriteLine("// " + line);
+                        sw.WriteLine();
+                    }
                 }
-                sw.WriteLine();
+
                 sw.WriteLine("using System;");
                 sw.WriteLine("using System.Collections.Generic;");
                 if (ShouldApplyNoPruneAttribute(config) || ShouldApplyNoRenamingAttribute(config))

@@ -12,9 +12,13 @@ namespace JsonClassGeneratorConsole
 		private static string _targetFolder = Environment.CurrentDirectory;
 		private static bool _showHelp = false;
 		private static bool _pascalCase = false;
-		private static bool _useFeilds = false;
+        private static bool _dedupeClasses = false;
+		private static bool _useNullableValues = false;
+        private static bool _sortFields = false;
+        private static bool _useFeilds = false;
 		private static bool _singleFile = false;
-		private static string _inputFilename;
+        private static bool _skipHeader = false;
+        private static string _inputFilename;
 
 		static int Main(string[] args)
 		{
@@ -27,7 +31,11 @@ namespace JsonClassGeneratorConsole
 					                 {"p|pascal", "use PascalCase", pc => _pascalCase = !string.IsNullOrWhiteSpace(pc)},
 									 {"f|feilds", "use Feilds (Default is Properties)", f => _useFeilds = !string.IsNullOrWhiteSpace(f)},
 									 {"sf|single", "generate a single file", sf => _singleFile = !string.IsNullOrWhiteSpace(sf)},
-									 {"i|input=", "input json file to process", json => _inputFilename = json}
+                                     {"dc|dedupeclasses", "dedupe classes", dc => _dedupeClasses = !string.IsNullOrWhiteSpace(dc)},
+                                     {"nv|usenullablevalues", "use nullable values", un => _useNullableValues = !string.IsNullOrWhiteSpace(un)},
+                                     {"smf|sortfields", "sort member fields", sf => _sortFields = !string.IsNullOrWhiteSpace(sf)},
+                                     {"sh|skipheader", "skip writing header", sh => _skipHeader = !string.IsNullOrWhiteSpace(sh)},
+                                     {"i|input=", "input json file to process", json => _inputFilename = json}
 				                 };
 
 			try
@@ -56,6 +64,10 @@ namespace JsonClassGeneratorConsole
 					          UsePascalCase = _pascalCase,
 					          SingleFile = _singleFile,
 							  UseProperties = !_useFeilds,
+							  DeduplicateClasses = _dedupeClasses,
+							  AlwaysUseNullableValues = _useNullableValues,
+							  SortMemberFields = _sortFields,
+							  SkipHeader = _skipHeader,
 							  Example = jsonFile
 				          };
 

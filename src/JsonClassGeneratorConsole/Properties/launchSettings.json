@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Xamasoft.JsonCSharpClassGenerator": {
+      "commandName": "Project",
+      "commandLineArgs": "--namespace=\"NetAppDocs.Types.ONTAP.Rest.Cluster\" --class=\"ClusterAttributes\" --input=\"C:\\Users\\cole\\Development\\Projects\\Current\\NetAppDocs\\src\\NetAppDocs.NET\\Tests\\Models\\Data\\Ontap\\cluster\\clusterAttributes.json\" --pascal --single --target=\"X:\\test\" --usenullablevalues --dedupeclasses --sortfields --skipheader"
+    }
+  }
+}

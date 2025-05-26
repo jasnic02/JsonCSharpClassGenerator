@@ -24,5 +24,6 @@ namespace Xamasoft.JsonClassGenerator
         bool AlwaysUseNullableValues { get; set; }
         bool UseNamespaces { get; }
         bool ExamplesInDocumentation { get; set; }
+        bool SkipHeader { get; set; }
     }
 }

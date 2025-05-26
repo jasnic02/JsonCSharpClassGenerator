@@ -35,12 +35,11 @@ namespace Xamasoft.JsonClassGenerator
         public bool AlwaysUseNullableValues { get; set; }
         public bool ExamplesInDocumentation { get; set; }
         public bool DeduplicateClasses { get; set; }
-
         public Action<string> FeedBack { get; set; }
-
         private bool used = false;
         public bool UseNamespaces { get { return Namespace != null; } }
-
+        public bool SkipHeader { get; set; }
+        
         public void GenerateClasses()
         {
             if (CodeWriter == null) CodeWriter = new CSharpCodeWriter();
@@ -261,7 +260,7 @@ namespace Xamasoft.JsonClassGenerator
             var rootNamespace = false;
 
             CodeWriter.WriteFileStart(this, sw);
-            foreach (var type in types)
+            foreach (var type in types.OrderByDescending(t => t.IsRoot))
             {
                 if (UseNamespaces && inNamespace && rootNamespace != type.IsRoot && SecondaryNamespace != null) { CodeWriter.WriteNamespaceEnd(this, sw, rootNamespace); inNamespace = false; }
                 if (UseNamespaces && !inNamespace) { CodeWriter.WriteNamespaceStart(this, sw, type.IsRoot); inNamespace = true; rootNamespace = type.IsRoot; }
