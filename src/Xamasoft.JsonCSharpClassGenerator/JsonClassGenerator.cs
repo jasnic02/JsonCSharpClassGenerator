@@ -39,6 +39,7 @@ namespace Xamasoft.JsonClassGenerator
         private bool used = false;
         public bool UseNamespaces { get { return Namespace != null; } }
         public bool SkipHeader { get; set; }
+        public bool SortClasses { get; set; }
         
         public void GenerateClasses()
         {
@@ -84,6 +85,11 @@ namespace Xamasoft.JsonClassGenerator
             {
                 FeedBack?.Invoke("De-duplicating classes");
                 DeDuplicateClasses();
+            }
+
+            if (SortClasses)
+            {
+                Types = Types.OrderByDescending(t => t.IsRoot).ThenBy(t => t.AssignedName).ToList();
             }
 
             FeedBack?.Invoke("Writing classes to disk.");
@@ -260,7 +266,7 @@ namespace Xamasoft.JsonClassGenerator
             var rootNamespace = false;
 
             CodeWriter.WriteFileStart(this, sw);
-            foreach (var type in types.OrderByDescending(t => t.IsRoot))
+            foreach (var type in types)
             {
                 if (UseNamespaces && inNamespace && rootNamespace != type.IsRoot && SecondaryNamespace != null) { CodeWriter.WriteNamespaceEnd(this, sw, rootNamespace); inNamespace = false; }
                 if (UseNamespaces && !inNamespace) { CodeWriter.WriteNamespaceStart(this, sw, type.IsRoot); inNamespace = true; rootNamespace = type.IsRoot; }

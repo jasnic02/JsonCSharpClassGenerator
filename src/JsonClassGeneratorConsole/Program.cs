@@ -18,6 +18,7 @@ namespace JsonClassGeneratorConsole
         private static bool _useFeilds = false;
 		private static bool _singleFile = false;
         private static bool _skipHeader = false;
+        private static bool _sortClasses = false;
         private static string _inputFilename;
 
 		static int Main(string[] args)
@@ -35,6 +36,7 @@ namespace JsonClassGeneratorConsole
                                      {"nv|usenullablevalues", "use nullable values", un => _useNullableValues = !string.IsNullOrWhiteSpace(un)},
                                      {"smf|sortfields", "sort member fields", sf => _sortFields = !string.IsNullOrWhiteSpace(sf)},
                                      {"sh|skipheader", "skip writing header", sh => _skipHeader = !string.IsNullOrWhiteSpace(sh)},
+                                     {"sc|sortclasses", "sort classes", sc => _sortClasses = !string.IsNullOrWhiteSpace(sc)},
                                      {"i|input=", "input json file to process", json => _inputFilename = json}
 				                 };
 
@@ -68,6 +70,7 @@ namespace JsonClassGeneratorConsole
 							  AlwaysUseNullableValues = _useNullableValues,
 							  SortMemberFields = _sortFields,
 							  SkipHeader = _skipHeader,
+							  SortClasses = _sortClasses,
 							  Example = jsonFile
 				          };
 
