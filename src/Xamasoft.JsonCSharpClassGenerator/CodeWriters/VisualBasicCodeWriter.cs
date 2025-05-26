@@ -28,7 +28,8 @@ namespace Xamasoft.JsonClassGenerator.CodeWriters
             switch (type.Type)
             {
                 case JsonTypeEnum.Anything: return "Object";
-                case JsonTypeEnum.Array: return arraysAsLists ? "IList(Of " + GetTypeName(type.InternalType, config) + ")" : GetTypeName(type.InternalType, config) + "()";
+                //case JsonTypeEnum.Array: return arraysAsLists ? "IList(Of " + GetTypeName(type.InternalType, config) + ")" : GetTypeName(type.InternalType, config) + "()";
+                case JsonTypeEnum.Array: return arraysAsLists ? "List(Of " + GetTypeName(type.InternalType, config) + ")" : GetTypeName(type.InternalType, config) + "()";
                 case JsonTypeEnum.Dictionary: return "Dictionary(Of String, " + GetTypeName(type.InternalType, config) + ")";
                 case JsonTypeEnum.Boolean: return "Boolean";
                 case JsonTypeEnum.Float: return "Double";
@@ -93,9 +94,11 @@ namespace Xamasoft.JsonClassGenerator.CodeWriters
 
         private void WriteClassMembers(IJsonClassGeneratorConfig config, TextWriter sw, JsonType type, string prefix)
         {
-            foreach (var field in type.Fields)
+            IList<FieldInfo> theFields = type.Fields;
+            if (config.SortMemberFields) theFields = theFields.OrderBy(f => f.JsonMemberName).ToList();
+            foreach (var field in theFields)
             {
-                if (config.UsePascalCase || config.ExamplesInDocumentation) sw.WriteLine();
+                if ((config.UsePascalCase || config.ExamplesInDocumentation) && theFields.First() != field) sw.WriteLine();
 
                 if (config.ExamplesInDocumentation)
                 {
@@ -128,11 +131,15 @@ namespace Xamasoft.JsonClassGenerator.CodeWriters
 
         public void WriteFileStart(IJsonClassGeneratorConfig config, TextWriter sw)
         {
-            foreach (var line in JsonClassGenerator.FileHeader)
+            if (!config.SkipHeader)
             {
-                sw.WriteLine("' " + line);
+                foreach (var line in JsonClassGenerator.FileHeader)
+                {
+                    sw.WriteLine("' " + line);
+                    sw.WriteLine();
+                }
             }
-            sw.WriteLine();
+            
             sw.WriteLine("Imports System");
             sw.WriteLine("Imports System.Collections.Generic");
             if (ShouldApplyNoRenamingAttribute(config) || ShouldApplyNoPruneAttribute(config))

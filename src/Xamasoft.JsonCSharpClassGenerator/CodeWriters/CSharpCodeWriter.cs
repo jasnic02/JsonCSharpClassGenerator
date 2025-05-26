@@ -110,7 +110,7 @@ namespace Xamasoft.JsonClassGenerator.CodeWriters
             sw.WriteLine();
             sw.WriteLine("namespace {0}", root && !config.UseNestedClasses ? config.Namespace : (config.SecondaryNamespace ?? config.Namespace));
             sw.WriteLine("{");
-            //sw.WriteLine();
+            sw.WriteLine();
         }
 
         public void WriteNamespaceEnd(IJsonClassGeneratorConfig config, TextWriter sw, bool root)
