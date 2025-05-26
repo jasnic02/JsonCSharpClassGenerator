@@ -15,7 +15,7 @@ namespace JsonClassGeneratorConsole
         private static bool _dedupeClasses = false;
 		private static bool _useNullableValues = false;
         private static bool _sortFields = false;
-        private static bool _useFeilds = false;
+        private static bool _useFields = false;
 		private static bool _singleFile = false;
         private static bool _skipHeader = false;
         private static bool _sortClasses = false;
@@ -30,7 +30,7 @@ namespace JsonClassGeneratorConsole
 					                 {"c|class=", "the main class name", cn => _mainClassName = cn},
 					                 {"t|target=", "the target output folder", output => _targetFolder = output},
 					                 {"p|pascal", "use PascalCase", pc => _pascalCase = !string.IsNullOrWhiteSpace(pc)},
-									 {"f|feilds", "use Feilds (Default is Properties)", f => _useFeilds = !string.IsNullOrWhiteSpace(f)},
+									 {"f|fields", "use Fields (Default is Properties)", f => _useFields = !string.IsNullOrWhiteSpace(f)},
 									 {"sf|single", "generate a single file", sf => _singleFile = !string.IsNullOrWhiteSpace(sf)},
                                      {"dc|dedupeclasses", "dedupe classes", dc => _dedupeClasses = !string.IsNullOrWhiteSpace(dc)},
                                      {"nv|usenullablevalues", "use nullable values", un => _useNullableValues = !string.IsNullOrWhiteSpace(un)},
@@ -65,7 +65,7 @@ namespace JsonClassGeneratorConsole
 					          MainClass = _mainClassName,
 					          UsePascalCase = _pascalCase,
 					          SingleFile = _singleFile,
-							  UseProperties = !_useFeilds,
+							  UseProperties = !_useFields,
 							  DeduplicateClasses = _dedupeClasses,
 							  AlwaysUseNullableValues = _useNullableValues,
 							  SortMemberFields = _sortFields,
