@@ -80,7 +80,7 @@ namespace Xamasoft.JsonClassGenerator.CodeWriters
                     sw.WriteLine("using System.Reflection;");
                 if (!config.ExplicitDeserialization && config.UsePascalCase)
                     sw.WriteLine("using Newtonsoft.Json;");
-                sw.WriteLine("using Newtonsoft.Json.Linq;");
+                //sw.WriteLine("using Newtonsoft.Json.Linq;");
                 if (config.ExplicitDeserialization)
                     sw.WriteLine("using JsonCSharpClassGenerator;");
                 if (config.SecondaryNamespace != null && config.HasSecondaryClasses && !config.UseNestedClasses)

@@ -2,7 +2,7 @@
   "profiles": {
     "Xamasoft.JsonCSharpClassGenerator": {
       "commandName": "Project",
-      "commandLineArgs": "--namespace=\"NetAppDocs.Types.ONTAP.Rest.Cluster\" --class=\"ClusterAttributes\" --input=\"C:\\Users\\cole\\Development\\Projects\\Current\\NetAppDocs\\src\\NetAppDocs.NET\\Tests\\Models\\Data\\Ontap\\cluster\\clusterAttributes.json\" --pascal --single --target=\"X:\\test\" --usenullablevalues --dedupeclasses --sortfields --skipheader --sortclasses"
+      "commandLineArgs": "--namespace=\"NetAppDocs.Types.ONTAP.Rest.Cluster\" --class=\"Job\" --input=\"C:\\Users\\cole\\Development\\Projects\\Current\\NetAppDocs\\src\\NetAppDocs.NET\\Tests\\Models\\Data\\Ontap\\cluster\\jobs.json\" --pascal --single --target=\"C:\\Users\\cole\\Development\\Projects\\Current\\NetAppDocs\\src\\NetAppDocs.NET\\Models\\ONTAP\\Cluster\" --usenullablevalues --dedupeclasses --sortfields --skipheader --sortclasses"
     }
   }
 }
