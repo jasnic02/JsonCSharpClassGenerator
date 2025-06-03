@@ -271,6 +271,8 @@ namespace Xamasoft.JsonClassGenerator
                 if (UseNamespaces && inNamespace && rootNamespace != type.IsRoot && SecondaryNamespace != null) { CodeWriter.WriteNamespaceEnd(this, sw, rootNamespace); inNamespace = false; }
                 if (UseNamespaces && !inNamespace) { CodeWriter.WriteNamespaceStart(this, sw, type.IsRoot); inNamespace = true; rootNamespace = type.IsRoot; }
                 CodeWriter.WriteClass(this, sw, type);
+                if (types.Last() != type) sw.WriteLine();
+                
             }
             if (UseNamespaces && inNamespace) CodeWriter.WriteNamespaceEnd(this, sw, rootNamespace);
             CodeWriter.WriteFileEnd(this, sw);
